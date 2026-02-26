@@ -7,7 +7,7 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.tools import tool
-from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain_classic.agents import create_tool_calling_agent, AgentExecutor
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -16,9 +16,10 @@ load_dotenv()
 # Setup Free Fast LLM
 llm = ChatGroq(
     temperature=0, 
-    model_name="llama-3.1-8b-instant", 
+    model_name="llama-3.1-8b-instant", # type: ignore
+
     api_key=os.environ.get("GROQ_API_KEY") 
-)
+) # type: ignore
 
 # =====================================================================
 # 1. DEFINE TOOLS (Agentic Capabilities)
@@ -40,8 +41,9 @@ prompt = ChatPromptTemplate.from_messages([
     ("placeholder", "{agent_scratchpad}"),
 ])
 
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools)
+agent = create_tool_calling_agent(llm, tools, prompt) # type: ignore
+agent_executor = AgentExecutor(agent=agent, tools=tools) # type: ignore
+
 
 # =====================================================================
 # 3. CHAINLIT WEB UI LOGIC (Kept for easy browser debugging)

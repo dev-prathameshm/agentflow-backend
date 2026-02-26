@@ -1,6 +1,7 @@
 chainlit
-langchain>=0.2.0
-langchain-core>=0.2.0
-langchain-groq>=0.1.0
+langchain
+langchain-core
+langchain-groq
+langchain-classic
 python-dotenv
 fastapi
